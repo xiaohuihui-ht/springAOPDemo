@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <bean id="a" class="com.lzh.A"></bean>
+    <bean id="b" class="com.lzh.B"></bean>
+    <bean id="c" class="com.lzh.C"></bean>
+    <aop:config>
+        <aop:aspect ref="b">
+            <!-- 定义切点 -->
+            <aop:pointcut id="aopTest" expression="execution(* *.hello(..))"/>
+
+            <!-- 声明前置通知 (在切点方法被执行前调用)-->
+            <aop:before method="beforHello" pointcut-ref="aopTest"></aop:before>
+
+            <!-- 声明后置通知 (在切点方法被执行后调用)-->
+            <aop:after method="afterHello" pointcut-ref="aopTest"></aop:after>
+        </aop:aspect>
+    </aop:config>
+</beans>
